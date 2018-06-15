@@ -20,10 +20,7 @@ public class PhoneMain {
 		PhoneButt[] buttons = { PhoneButt.EXIT, PhoneButt.TELEPHONE,PhoneButt.CELLPHONE,PhoneButt.IPhone,PhoneButt.GalaxyPhone
 				};
 
-		Phone phone = null;
-		 CellPhone cp = null;
-		IPhone ip =null;
-		GalaxyPhone gp =null;
+		Phone phone = null; //다형성
 		while(true) {
 			switch ((PhoneButt) JOptionPane.showInputDialog(null, "MAIN PAGE", "SELECT MENU", JOptionPane.QUESTION_MESSAGE,
 					null, buttons, null)) {
@@ -36,27 +33,27 @@ public class PhoneMain {
 				JOptionPane.showMessageDialog(null, phone.toString());
 				break;
 			case CELLPHONE :
-				cp=new CellPhone();
+				phone=new CellPhone();
 				
-				cp.setName(JOptionPane.showInputDialog("이름"));
-				cp.setphoneNum(JOptionPane.showInputDialog("전화번호"));
-				cp.setCall(JOptionPane.showInputDialog("통화내용"));
-				JOptionPane.showMessageDialog(null, cp.toString());
+				phone.setName(JOptionPane.showInputDialog("이름"));
+				phone.setphoneNum(JOptionPane.showInputDialog("전화번호"));
+				phone.setCall(JOptionPane.showInputDialog("통화내용"));
+				JOptionPane.showMessageDialog(null, phone.toString());
 				break;
 			case IPhone :
-				ip=new IPhone();
-				ip.setName(JOptionPane.showInputDialog("이름"));
-				ip.setphoneNum(JOptionPane.showInputDialog("전화번호"));
-				ip.setDate(JOptionPane.showInputDialog("무엇을"));
-				JOptionPane.showMessageDialog(null, ip.toString());
+				phone=new IPhone();
+				phone.setName(JOptionPane.showInputDialog("이름"));
+				phone.setphoneNum(JOptionPane.showInputDialog("전화번호"));
+				((IPhone) phone).setDate(JOptionPane.showInputDialog("무엇을"));
+				JOptionPane.showMessageDialog(null, phone.toString());
 				break;
 			case GalaxyPhone :
-				gp=new GalaxyPhone();
-				gp.setName(JOptionPane.showInputDialog("이름"));
-				gp.setphoneNum(JOptionPane.showInputDialog("전화번호"));
-				gp.setData(JOptionPane.showInputDialog("무엇을"));
-				gp.setSize(); //입력값을 받지 않고 고정 시켜도 한줄 써야함
-				JOptionPane.showMessageDialog(null, gp.toString());
+				phone=new GalaxyPhone();
+				phone.setName(JOptionPane.showInputDialog("이름"));
+				phone.setphoneNum(JOptionPane.showInputDialog("전화번호"));
+				((GalaxyPhone) phone).setData(JOptionPane.showInputDialog("무엇을"));
+				((GalaxyPhone) phone).setSize(); //입력값을 받지 않고 고정 시켜도 한줄 써야함
+				JOptionPane.showMessageDialog(null, phone.toString());
 				break;
 				
 				

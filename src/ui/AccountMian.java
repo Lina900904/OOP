@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import domain.Account;
 import domain.MinusAccount;
+
 /*비트뱅크
 기본통장
 계좌번호 123-456-789
@@ -21,11 +22,15 @@ import domain.MinusAccount;
 public class AccountMian {
 
 	enum AccountButt {
-		EXIT, ACCOUNT, MINUSACCOUNT;
+		EXIT, ACCOUNT, MINUSACCOUNT, DEPOSIT, WITHDRAW;
 	}
 
+	private static MinusAccount accout;
+	private static int money;
+
 	public static void main(String[] args) {
-		AccountButt[] buttons = { AccountButt.EXIT,AccountButt.ACCOUNT,AccountButt.MINUSACCOUNT };
+		AccountButt[] buttons = { AccountButt.EXIT,AccountButt.ACCOUNT,AccountButt.MINUSACCOUNT,
+				AccountButt.DEPOSIT, AccountButt.WITHDRAW};
 
 		Account account = null;
 		MinusAccount minusaccount = null;
@@ -35,29 +40,65 @@ public class AccountMian {
 			case EXIT:
 				return;
 			case ACCOUNT:
-				account = new Account();
-				account.setName(JOptionPane.showInputDialog("Name"));
+				account = new Account(
+						JOptionPane.showInputDialog("Name"),
+						JOptionPane.showInputDialog("User ID"),
+						JOptionPane.showInputDialog("Password")
+						);
 				account.setMoney(Integer.parseInt(JOptionPane.showInputDialog("Money")));
-				account.setUid(JOptionPane.showInputDialog("User ID"));
-				account.setPass(JOptionPane.showInputDialog("Password"));
-				account.setAccountType();
-				account.setAccountNo();
-				account.setCreateDate();
 				JOptionPane.showMessageDialog(null,account.toString());
 				break;
 			case MINUSACCOUNT:
-				minusaccount = new MinusAccount();
-				minusaccount.setName(JOptionPane.showInputDialog("Name"));
-				minusaccount.setMoney(Integer.parseInt(JOptionPane.showInputDialog("Money")));
-				minusaccount.setUid(JOptionPane.showInputDialog("User ID"));
-				minusaccount.setPass(JOptionPane.showInputDialog("Password"));
-				minusaccount.setAccountType();
-				minusaccount.setAccountNo();
-				minusaccount.setCreateDate();
-				JOptionPane.showMessageDialog(null,minusaccount.toString());
+				account = new MinusAccount(
+						JOptionPane.showInputDialog("Name"),
+						JOptionPane.showInputDialog("User ID"),
+						JOptionPane.showInputDialog("Password")
+						);
+				account.setMoney(Integer.parseInt(JOptionPane.showInputDialog("대출한도")));
+				account.setMoney(Integer.parseInt(JOptionPane.showInputDialog("얼마를 대출받으실래요")));
+				JOptionPane.showMessageDialog(null,account.toString());
 				break;
-
+			case DEPOSIT:
+			
+				JOptionPane.showMessageDialog(null,"잔액:"+account.getMoney());
+				account.setDeposit(Integer.parseInt(JOptionPane.showInputDialog("입금 금액")));
+				JOptionPane.showMessageDialog(null,account.toString());
+				
+				break;
+				
+			case WITHDRAW:
+				JOptionPane.showMessageDialog(null,"잔액:"+account.getMoney());
+				if(((MinusAccount)account).getLimit()!=0) {
+					Integer.parseInt(JOptionPane.showInputDialog("출금 금액"));
+					if (money>((MinusAccount) accout).getLimit()) {
+						JOptionPane.showMessageDialog(null, "출금성공");
+					}else {
+						JOptionPane.showMessageDialog(null, "출금불가능");
+					}
+				}else {
+					if(money>((MinusAccount) accout).getLimit()) {
+						JOptionPane.showMessageDialog(null, "출금성공");
+					}else {
+						JOptionPane.showMessageDialog(null, "출금불가능");
+					}
+				}
+				
+				
+				JOptionPane.showMessageDialog(null,account.toString());	
+			
+				break;
+			default : return;
+			
 			}
+			
+		
+		
+
+
 		}
+
 	}
 }
+	
+
+

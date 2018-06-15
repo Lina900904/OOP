@@ -84,12 +84,7 @@ public class Main {
 				break;
 
 			case INPUT_SALARY:
-				salary = new Salary();
 				salary.setDept(JOptionPane.showInputDialog("부서"));
-				salary.setName(JOptionPane.showInputDialog("이름"));
-				salary.setSal(Integer.parseInt(JOptionPane.showInputDialog("본봉")));
-				salary.setBonus(Integer.parseInt(JOptionPane.showInputDialog("수당")));
-				salary.setTotal();
 				arr2[c] = salary;
 				c++;
 				break;
